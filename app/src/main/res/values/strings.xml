@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Demo01</string>
     <string name="helloMessage">Hello John Woo.This is a message</string>
+    <string name="helloMessage2">Hello AuiAye.This is a message.</string>
 </resources>

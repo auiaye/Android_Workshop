@@ -21,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
         this.tvMessage.setText(R.string.helloMessage);
     }
 
+    @OnClick(R.id.btnHello2)
+    public void doClickHello2(){
+        this.tvMessage.setText(R.string.helloMessage2);
+
+    }
 
 
 
