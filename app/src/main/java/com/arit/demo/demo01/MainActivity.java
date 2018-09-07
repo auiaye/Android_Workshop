@@ -2,16 +2,20 @@ package com.arit.demo.demo01;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.math.BigDecimal;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,14 +40,43 @@ public class MainActivity extends AppCompatActivity {
         double dblHeight, dblWeight, numBMI;
         String getCalculate;
         int decimalPlaces = 2;
-        dblHeight = Double.parseDouble(this.txtHeight.getText().toString());
-        dblWeight = Double.parseDouble(this.txtWeight.getText().toString());
-        numBMI = (dblWeight/((dblHeight/100)*2));
-        BigDecimal bd = new BigDecimal(numBMI);
-        bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
-        numBMI = bd.doubleValue();
-        getCalculate = Calculate_BMI(numBMI);
-        this.tvMessage.setText("BMI : " + getCalculate);
+        String strHeight, strWeight;
+        strHeight = this.txtHeight.getText().toString();
+        strWeight = this.txtWeight.getText().toString();
+        if( !strHeight.equals("") || !strWeight.equals("")){
+            dblHeight = Double.parseDouble(this.txtHeight.getText().toString());
+            dblWeight = Double.parseDouble(this.txtWeight.getText().toString());
+            numBMI = (dblWeight / ((dblHeight / 100) * 2));
+            BigDecimal bd = new BigDecimal(numBMI);
+            bd = bd.setScale(decimalPlaces, BigDecimal.ROUND_HALF_UP);
+            numBMI = bd.doubleValue();
+            getCalculate = Calculate_BMI(numBMI);
+            this.tvMessage.setText("BMI : " + getCalculate);
+        }else{
+
+            this.tvMessage.setText("Please check input text : Height / Weight!");
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("!Error Message!");
+            builder.setMessage("Please check input text : Height / Weight!");
+//            builder.setPositiveButton("รับ", new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int id) {
+//                    Toast.makeText(getApplicationContext(),
+//                            "ขอบคุณครับ", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+
+//            builder.setNegativeButton("ไม่ชอบซักทีม", null);
+
+            builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+//            builder.create();
+            builder.show();
+
+        }
     }
 
     public static String Calculate_BMI(double numBMI) {
