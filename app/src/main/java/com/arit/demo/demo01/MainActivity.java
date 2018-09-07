@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
         String strHeight, strWeight;
         strHeight = this.txtHeight.getText().toString();
         strWeight = this.txtWeight.getText().toString();
-        if( !strHeight.equals("") || !strWeight.equals("")){
+
+
+        if(!strHeight.equals("") && !strWeight.equals("")){
             dblHeight = Double.parseDouble(this.txtHeight.getText().toString());
             dblWeight = Double.parseDouble(this.txtWeight.getText().toString());
             numBMI = (dblWeight / ((dblHeight / 100) * 2));
